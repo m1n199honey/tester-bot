@@ -14,5 +14,9 @@ const client = new Client({
 });
 client.login(config.TOKEN);
 client.commands = new Collection();
+client.codeDB = config.codeDB;
+client.codeIDs = config.codeIDs;
+client.adminID = config.adminID;
+client.cmdID = config.cmdID;
 require(path.join(__dirname, "handleEvents.js"))(client);
 client.handleEvents();

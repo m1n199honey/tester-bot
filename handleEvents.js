@@ -1,6 +1,7 @@
 console.log("In handleEvents.js ...(/)");
 const fs = require("fs");
 const path = require("path");
+const messageCreate = require("./events/message/messageCreate");
 
 module.exports = (client) => {
     console.log("Loading commands ...(/)");
@@ -29,4 +30,12 @@ module.exports = (client) => {
             }
         }
     };
+    // called from messageCreate.js when message.startsWith -> sudo 
+    client.sudo = async (message) => {
+        const command = client.commands.get(message.commands[0]);
+        if (!command) return;
+        try { await command.execute(message, client); }
+        catch (error) { console.log(error); }
+        return;
+    }
 };
