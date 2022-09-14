@@ -1,4 +1,6 @@
 console.log('In bot.js .....(/)');
+console.log('new line');
+
 const path = require('node:path');
 const config = require(path.join(__dirname, "config.json"));
 const { Client, Collection, GatewayIntentBits } = require('discord.js');

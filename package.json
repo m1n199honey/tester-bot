@@ -1,26 +1,18 @@
 {
-  "name": "discord-bots",
+  "name": "nodejs",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node .",
-    "deploy": "node deploy-commands.js && node ."
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hachimetsu/discord-bots.git"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/hachimetsu/discord-bots/issues"
-  },
-  "homepage": "https://github.com/hachimetsu/discord-bots#readme",
   "dependencies": {
     "@discordjs/rest": "^1.1.0",
+    "@types/node": "^18.0.6",
     "discord.js": "^14.3.0",
-    "dotenv": "^16.0.2"
+    "node-fetch": "^3.2.6"
   }
 }
