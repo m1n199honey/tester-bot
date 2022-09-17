@@ -10,5 +10,13 @@ module.exports = (client) => {
     if (config.prifix) client.prifix  = config.prifix;
     if (config.databaseID) client.databaseID = config.databaseID;
     
+    // client.database = {};
+    
+    // client.channels.cache.get(config.databaseID)
+    //     .children.cache
+    //     .forEach(e => {
+    //       client.database[e.id] = e.name;
+    //     });
+    // console.log(client.database);
   }
 };
