@@ -1,9 +1,10 @@
-console.log("In handleEvents.js ...(/)");
+console.log("\n In handleEvents.js ...(/)");
 const fs = require("fs");
 const path = require("path");
-const messageCreate = require("./events/message/messageCreate");
 
 module.exports = (client) => {
+  //initialize commands... from commands folder & add them in client.commands ->
+  //client.commands used in functions -> sudo
     console.log("Loading commands ...(/)");
     const commandsPath = path.join(__dirname, "commands");
     for (const folder of fs.readdirSync(commandsPath)) {
@@ -14,6 +15,15 @@ module.exports = (client) => {
         }
     }
     console.log("done...");
+  
+  //initialize functions... from functions folder and add them in client ->
+     const functionsPath = path.join(__dirname, "functions");
+     for (const folder of fs.readdirSync(functionsPath)) {
+         const folderPath = path.join(functionsPath, folder);
+         for (const file of fs.readdirSync(folderPath).filter((f) => f.endsWith(".js")))
+                require(path.join(folderPath, file))(client);
+    }
+  //handle events... from events folder & triger them on call -> 
     client.handleEvents = async () => {
         console.log("Initialising Events ...(/)");
         const eventsPath = path.join(__dirname, "events");
@@ -30,12 +40,6 @@ module.exports = (client) => {
             }
         }
     };
-    // called from messageCreate.js when message.startsWith -> sudo 
-    client.sudo = async (message) => {
-        const command = client.commands.get(message.commands[0]);
-        if (!command) return;
-        try { await command.execute(message, client); }
-        catch (error) { console.log(error); }
-        return;
-    }
+ 
+
 };

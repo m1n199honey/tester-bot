@@ -1,24 +1,19 @@
 console.log('In bot.js .....(/)');
-console.log('new line');
-
 const path = require('node:path');
-const config = require(path.join(__dirname, "config.json"));
+const config = require(path.join(__dirname, "config"));
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const client = new Client({
-    intents: [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent,
-        GatewayIntentBits.DirectMessages,
-        GatewayIntentBits.GuildPresences
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.DirectMessages,
+    GatewayIntentBits.GuildPresences
 
-    ]
+  ]
 });
-client.login(config.TOKEN);
+client.login(process.env.TOKEN);
+//to store commands data, initialize in handleEvents.js
 client.commands = new Collection();
-client.codeDB = config.codeDB;
-client.codeIDs = config.codeIDs;
-client.adminID = config.adminID;
-client.cmdID = config.cmdID;
-require(path.join(__dirname, "handleEvents.js"))(client);
-client.handleEvents();
+require(path.join(__dirname, "handleEvents"))(client);
+client.handleEvents();//goto handleEvents.js
