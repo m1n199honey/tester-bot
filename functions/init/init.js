@@ -1,4 +1,6 @@
 const path = require("node:path");
+const fs = require("fs");
+
 const config = require(path.join(__dirname, "..", "..", "config"));
 
 module.exports = (client) => {
@@ -9,19 +11,24 @@ module.exports = (client) => {
     if (config.adminID) client.adminID = config.adminID;
     if (config.prifix) client.prifix = config.prifix;
     if (config.databaseID) client.databaseID = config.databaseID;
-
+    if (config.guildID) client.guildID = config.guildID;
+ 
     //to store database channels IDs
     client.database = {};
+    client.databaseIDs = {}
+    
 
     //using ID of categoryChannel (database)
     //puting it's channels in client.database,
     //id as keys and name as values 
     client.channels.cache.get(config.databaseID)
       .children.cache
-      .forEach( async (channel) => {
+      .forEach( async (channel,i) => {
         let m = await channel.messages.fetch(channel.lastMessageId);
-        var IDs = m.content.split(/[, ]+/);
-        client.database[IDs.shift()] = m.id;
+        let IDs = m.content.split(/[, ]+/);
+        client.database[IDs[0]] = m.id;
+        client.databaseIDs[IDs.shift()] = IDs;
+        
         //init ng commands IDs
         const commandsPath = path.join(__dirname, "..", "..", "commands");
           

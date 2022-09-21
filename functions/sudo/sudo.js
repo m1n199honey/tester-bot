@@ -9,14 +9,14 @@ module.exports = (client) => {
     if(message.sudoString[0] == client.prifix) {
       
       //removing sudo from sudoString array coz sudo work is done here
-      message.sudoString = message.sudoString.filter(e => e != "sudo");
+      message.sudoString.shift();
       
     //goto functions -> sudo if there is next command 
     // if not then show empty error...
     if(message.sudoString && message.sudoString.length) {
       
       //geting data of command, saved in client.commands at handleEvents.js
-      const command = client.commands.get(message.sudoString[0]);
+      const command = client.commands.get(message.sudoString.shift());
       
       //if command is "undefined" 
       if (!command) {

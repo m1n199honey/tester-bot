@@ -1,14 +1,16 @@
 const path = require("node:path")
 const { EmbedBuilder } = require("discord.js");
-const codeID = null;
+var codeID = null;
 module.exports = {
   data: {
     name: "ping",
     discription: "add code to discordjs channel",
   },
+  
   async init(ID) {
     codeID = ID.substr(ID.length - 10);//to initialize command ID 
   },
+  
   async execute(message, client) {
     console.log("commands -> DB -> ping.js");
 

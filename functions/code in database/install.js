@@ -7,7 +7,7 @@ module.exports = (client) => {
     console.log("installing Code...");
     
     if (message.content.endsWith("code")) {
-      const commandsPath = path.join(__dirname, "commands");
+      const commandsPath = path.join(__dirname, "..", "..", "commands");
       
       for (const folder of fs.readdirSync(commandsPath)) {
         const folderPath = path.join(commandsPath, folder);

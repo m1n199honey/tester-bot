@@ -3,7 +3,7 @@ module.exports = {
   name: 'messageCreate',
   async execute(message, client) {
     console.log("\n message event ...");
-    //if message start with prifix we set...
+    //if message start with prifix(default::sudo) we set...
     if (message.content.startsWith(client.prifix))
       return client.sudo(message);
 
