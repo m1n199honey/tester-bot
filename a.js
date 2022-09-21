@@ -1,8 +1,3 @@
-const path = require("path");
-const fs = require("fs");
+var a = [0,1,2,3,4,5];
 
-const codePath = path.join(__dirname, "codeDatabase");
-for (const file of fs.readdirSync(codePath).filter((f) => f.endsWith(".js"))) {
-    const code = require(path.join(codePath, file));
-      console.log(code);
-}
+console.log(a[a.shift()]);

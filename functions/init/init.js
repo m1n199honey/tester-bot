@@ -20,8 +20,26 @@ module.exports = (client) => {
       .children.cache
       .forEach( async (channel) => {
         let m = await channel.messages.fetch(channel.lastMessageId);
-        let Id = m.content.split(/[, ]+/)[0];
-        client.database[Id] = m.id;
+        var IDs = m.content.split(/[, ]+/);
+        client.database[IDs.shift()] = m.id;
+        //init ng commands IDs
+        const commandsPath = path.join(__dirname, "..", "..", "commands");
+          
+        for (const folder of fs.readdirSync(commandsPath)) {
+          const folderPath = path.join(commandsPath, folder);
+          
+          for (const file of fs.readdirSync(folderPath).filter((f) => f.endsWith(".js"))) {
+            const command = require(path.join(folderPath, file));
+            
+            if(command.code != undefined && command.code){
+              for(let ID of IDs)
+                if (ID) {
+                  ID = ID.substr(ID.length - 10);
+                  command.init(ID);
+                } 
+            }
+          }
+        }
       });
   }
 };
