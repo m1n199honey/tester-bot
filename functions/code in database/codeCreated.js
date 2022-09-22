@@ -3,7 +3,8 @@ module.exports = (client) => {
     console.log("codeCreated...");
 
     //fetch last message of message 
-    let ids = await message.channel.parent.messages.fetch(message.channel.parent.lastMessageId);
-    ids.edit(`${ids.content},${message.id}`);
+    let IDs = await message.channel.parent.messages.fetch(message.channel.parent.lastMessageId);
+    IDs.edit(`${IDs.content},${message.id}`);
+    client.databaseIDs[IDs.id].push(message.id);
   }
 };

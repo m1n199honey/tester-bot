@@ -20,7 +20,7 @@ module.exports = (client) => {
             
             if (ID) {
               ID = ID.substr(ID.length - 10);
-              command.init(ID);
+              command.init(ID);              
             } 
           }
         }

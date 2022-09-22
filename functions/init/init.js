@@ -23,7 +23,7 @@ module.exports = (client) => {
     //id as keys and name as values 
     client.channels.cache.get(config.databaseID)
       .children.cache
-      .forEach( async (channel,i) => {
+      .forEach( async (channel) => {
         let m = await channel.messages.fetch(channel.lastMessageId);
         let IDs = m.content.split(/[, ]+/);
         client.database[IDs[0]] = m.id;
